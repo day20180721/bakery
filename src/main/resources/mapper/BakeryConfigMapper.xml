@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.littlejenny.bakery.generator.mapper.BakeryConfigMapper">
+    <select id="selectOpenTime" resultType="java.lang.Integer">
+        SELECT value
+        FROM `bakery`.`config`
+        WHERE field = 'open';
+    </select>
+    <update id="updateOpenTime">
+        UPDATE `bakery`.`config`
+        SET value=#{newTime}
+        WHERE field = 'open';
+    </update>
+
+    <select id="selectCloseTime" resultType="java.lang.Integer">
+        SELECT value
+        FROM `bakery`.`config`
+        WHERE field = 'close';
+    </select>
+    <update id="updateCloseTime">
+        UPDATE `bakery`.`config`
+        SET value=#{newTime}
+        WHERE field = 'close';
+    </update>
+
+    <select id="selectReservationDateLine" resultType="java.lang.Integer">
+        SELECT value
+        FROM `bakery`.`config`
+        WHERE field = 'reservation-dead-line';
+    </select>
+    <update id="updateReservationDateLine">
+        UPDATE `bakery`.`config`
+        SET value=#{newTime}
+        WHERE field = 'reservation-dead-line';
+    </update>
+</mapper>

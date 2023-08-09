@@ -1,0 +1,8 @@
+@import '/css/element/page-number.css';
+/* 排版 margin padding border position */
+
+/* 文字樣式 */
+#preview-img {
+    max-width: 100%;
+}
+/* 非文字樣式 */

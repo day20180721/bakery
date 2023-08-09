@@ -1,0 +1,17 @@
+<div th:fragment="business">
+    <link rel="stylesheet" type="text/css" href="/css/dashboard.css">
+    <div class="business-service-dashboard">
+        <ul class="nav nav-pills nav-stacked">
+            <li role="presentation" class="business-service-link"><a th:href="|${businessPrefix}/b-shop|">商品行事曆</a>
+            </li>
+            <li role="presentation" class="business-service-link"><a th:href="|${businessPrefix}/b-product|">商品</a>
+            </li>
+            <li role="presentation" class="business-service-link"><a th:href="|${businessPrefix}/b-order|">所有訂單</a>
+            </li>
+            <li role="presentation" class="business-service-link"><a
+                    th:href="|${businessPrefix}/b-category|">商品層級</a></li>
+            <li role="presentation" class="business-service-link"><a
+                    th:href="|${businessPrefix}/b-bakery-config|">訂購條件</a>
+        </ul>
+    </div>
+</div>

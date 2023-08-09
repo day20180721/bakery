@@ -1,0 +1,7 @@
+<div th:fragment="links(name)">
+    <link rel="stylesheet" type="text/css" href="/css/my-min-bootstrap.css" th:href="@{/css/my-min-bootstrap.css}">
+    <link rel="stylesheet" type="text/css" href="/css/base-bakery.css">
+<!--    <link rel="stylesheet" type="text/css" href="/css/base-bakery-mobile.css">-->
+    <link rel="stylesheet" type="text/css" th:href="'/css/' + ${name} +'.css'"></link>
+<!--    <link rel="stylesheet" type="text/css" th:href="'/css/' + ${name} +'-mobile.css'"></link>-->
+</div>

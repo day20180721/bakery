@@ -1,0 +1,17 @@
+@import '/css/element/calendar.css';
+@import '/css/element/page-number.css';
+/* 排版 margin padding border position */
+.order-row .btn {
+    padding: 0;
+}
+
+.order-row .order-status-dropdown-container #order-status-dropdown {
+    display: inline-block;
+}
+
+body #order-status-dropdown {
+    display: none;
+}
+
+/* 文字樣式 */
+/* 非文字樣式 */

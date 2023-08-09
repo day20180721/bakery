@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.littlejenny.bakery.generator.mapper.CartPageMapper">
+    <select id="getCartItemVOByProductIdAndCount" resultType="com.littlejenny.bakery.vo.CartItemVO">
+        SELECT p.id as product_id, p.name, p.price, pos.new_price, #{count} as count,p.description,pos.stock, pos.reservation
+        FROM bakery.product_on_sale as pos
+            LEFT JOIN bakery.product as p
+        ON p.id = pos.product_id
+        WHERE pos.selled_date = DATE (#{date})
+          AND pos.product_id = #{productId};
+    </select>
+    <select id="getCartItemVOByCartItemAndReservationDate" resultType="com.littlejenny.bakery.vo.CartItemVO">
+        SELECT #{cartItem.id} as id,
+               #{cartItem.productId} as product_id,
+               #{cartItem.cartId} as cart_id,
+               p.name,
+               p.price,
+               pos.new_price,
+               #{cartItem.count} as count,
+               p.description,
+               pos.stock,
+               pos.reservation
+        FROM bakery.product_on_sale as pos
+                 LEFT JOIN bakery.product as p
+                           ON p.id = #{cartItem.productId}
+        WHERE pos.selled_date = DATE(#{reservationDate}) AND pos.product_id = #{cartItem.productId}
+
+    </select>
+</mapper>

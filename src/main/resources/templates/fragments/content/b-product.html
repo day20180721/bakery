@@ -1,0 +1,123 @@
+<div th:fragment="content(pageName)">
+    <div class="container-fluid ">
+        <div class="row">
+            <div class="col-md-3">
+                <th:block th:include="fragments/content/dashboard:: business"></th:block>
+            </div>
+            <div class="col-md-9">
+                <div class="row">
+                    <button type="button" class="btn btn-default" data-toggle="modal" id="add-product-btn"
+                            data-target="#product-modal">新增
+                    </button>
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th colspan="1">名稱</th>
+                            <th colspan="1">原價</th>
+                            <th colspan="1">描述</th>
+                            <th colspan="1">圖片</th>
+                            <th colspan="2">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody id="on-sale-product-list">
+                        <tr class="product-row" th:each="product:${products}" th:object="${product}">
+                            <input class="product-id" type="hidden" th:value="*{id}">
+                            <input class="product-category-id" type="hidden" th:value="*{categoryId}">
+                            <input class="product-category-name" type="hidden" th:value="*{categoryName}">
+                            <td class="product-name col-md-2" th:text="*{name}"></td>
+                            <td class="product-price col-md-2" th:text="*{#numbers.formatDecimal(price,0,0)}"></td>
+                            <td class="product-description col-md-2"
+                                th:text="*{description}"></td>
+                            <td class="col-md-2">
+                                <div class="thumbnail">
+                                    <img class="product-image-url" th:src="${product.imageUrl}"
+                                         alt="圖片已失效">
+                                </div>
+                            </td>
+                            <td class="col-md-4">
+                                <button type="button" class="btn btn-success edit-product-btn" data-toggle="modal"
+                                        data-target="#product-modal">編輯
+                                </button>
+                                <button type="button" class="btn btn-danger removeProductBtn">刪除</button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div id="page-number-list" class="col-md-12">
+                        <a th:href="|/buisness/b-product/${number}|"
+                           class="category-page-number-row"
+                           th:classappend="${selectedPage} == ${number} ? 'selected-page'"
+                           th:each="number:${pageNumberList}"
+                           th:text="${number}">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="product-modal" tabindex="-1" role="dialog">
+        <input type="hidden" id="product-id">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 id="modal-title">編輯</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="product-name" class="control-label">名稱:</label>
+                        <input type="text" class="form-control" id="product-name"></input>
+                        <div class="alert alert-danger error-alert" id="name-error" role="alert">...</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="product-price" class="control-label"> 原價:</label>
+                        <input type="number" class="form-control" id="product-price">
+                        <div class="alert alert-danger error-alert" id="price-error" role="alert">...</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="product-name" class="control-label">描述:</label>
+                        <input type="text" class="form-control" id="product-description"></input>
+                    </div>
+                    <div class="form-group">
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle"
+                                    id="category-panel-trigger"
+                                    data-toggle="dropdown"
+                                    aria-haspopup="true"
+                                    aria-expanded="true"
+                                    type="button">無
+                            </button>
+                            <div id="category-dropdown"
+                                 class="dropdown-menu" aria-labelledby="category-panel-trigger">
+                                <label for="category-filter" class="control-label">商品層級:</label>
+                                <input type="hidden" id="chosen-category">
+                                <input type="text" placeholder="Search.." id="category-filter">
+                                <div class="category-option-row" th:each="category : ${categorys}"
+                                     th:object="${category}">
+                                    <input type="hidden" class="category-option-id" th:value="*{id}">
+                                    <a th:text="*{name}"
+                                       class="category-option category-option-name" href="#"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="product-image-file">上傳封面</label>
+                        <form method="POST" enctype="multipart/form-data" id="uploaded-image-form">
+                            <input type="file" id="product-image-file" name="file" accept="image/*"></input>
+                        </form>
+                    </div>
+                    <div class="preview">
+                        <p id="preview-text">No files currently selected for upload</p>
+                        <img id="preview-img" alt="圖片已失效，請重新上傳">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn`-primary" id="submit-btn">確認</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,86 @@
+<div th:fragment="content(pageName)">
+    <div class="container-fluid ">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="my-deshboard">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li role="presentation" class="my-portfilo-link">
+                            <div class="calendar" th:data-request-highlight-url="|${customerPrefix}/cart/highLight|"
+                                 th:data-highlight="${highlightDates}"
+                                 th:data-request-date-url="${customerPrefix}+'/'+${pageName}"
+                                 th:data-selected-date="${selectedDate}"></div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1>訂單資訊</h1>
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th colspan="1">編號</th>
+                                    <th colspan="1">品名</th>
+                                    <th colspan="1">單價</th>
+                                    <th colspan="1">個數</th>
+                                    <th colspan="1">總價</th>
+                                    <th colspan="1">備註</th>
+                                    <th colspan="1"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr class="cart-item-row" th:each="item,iterStat:${items}" th:object="${item}">
+                                    <input type="hidden" class="cart-item-cart-id" th:value="*{cartId}">
+                                    <input type="hidden" class="cart-item-id" th:value="*{id}">
+                                    <input type="hidden" class="cart-item-product-id" th:value="*{productId}">
+                                    <td th:text="${iterStat.index}">編號</td>
+                                    <td class="cart-item-name" th:text="*{name}">NAME</td>
+                                    <td class="cart-item-price" th:text="*{#numbers.formatDecimal(price,0,0)}">PRICE</td>
+                                    <td><input class="cart-item-count" type="number" min="1" th:value="*{count}"
+                                               th:max="*{remaining}"></td>
+                                    <td class="cart-item-total-price" th:text="*{#numbers.formatDecimal(totalPrice,0,0)}">SUM</td>
+                                    <td class="cart-item-description" th:text="*{description}">DESCRIPTION</td>
+                                    <td>
+                                        <button type="button" class="btn btn-link cart-item-remove-btn">刪除
+                                        </button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <h1>取貨時間</h1>
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <label for="hour" class="control-label col-md-1">時</label>
+                                <div class="col-md-1">
+                                    <input type="number" id="hour" class="form-control" name="hour" th:min="${openTime}" th:max="${closeTime}" th:value="${openTime}">
+                                </div>
+                                <span id="helpBlock" class="help-block" th:text="|本日營業時間為 ${openTime}點 - ${closeTime}點，取貨時間如果為 24 ，請設置為 0|"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="minute" class="control-label col-md-1">分</label>
+                                <div class="col-md-1">
+                                    <input type="number" id="minute" class="form-control" name="minute"
+                                           min="0" max="59" value="0">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-12">
+                        <h1>備註</h1>
+                        <div class="form-group">
+                            <textarea id="comment" class="form-control" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <button id="submit-btn" type="button" class="btn btn-success">訂購</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

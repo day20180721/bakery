@@ -1,0 +1,66 @@
+<div th:fragment="content(pageName)">
+
+    <div class="container-fluid ">
+        <div class="row">
+            <div class="col-md-3">
+                <th:block th:include="fragments/content/dashboard:: business"></th:block>
+            </div>
+            <div class="col-md-9">
+                <div class="row">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th colspan="1">編號</th>
+                            <th colspan="1">訂購者姓名</th>
+                            <th colspan="1">訂購時間</th>
+                            <th colspan="1">總價</th>
+                            <th colspan="1">狀態</th>
+                            <th colspan="2">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="order-row" th:each="order,iterStat:${orders}" th:object="${order}">
+                            <Input type="hidden" class="order-id" th:value="*{id}">
+                            <td th:text="${iterStat.index}"></td>
+                            <td class="order-customer-id" th:text="*{customerId}"></td>
+                            <td class="order-shipping-time" th:text="*{shippingTime}"></td>
+                            <td class="order-total-price" th:text="*{#numbers.formatDecimal(totalPrice,0,0)}"></td>
+                            <td class="order-order-status" th:text="*{orderStatusName}"></td>
+                            <td>
+                                <button type="button" class="btn btn-primary edit-order-status-btn">修改狀態</button>
+                            </td>
+                            <td>
+                                <div class="order-status-dropdown-container">
+
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div id="page-number-list" class="col-md-12">
+                        <a th:href="|/buisness/b-order/${number}|"
+                           class="category-page-number-row"
+                           th:classappend="${selectedPage} == ${number} ? 'selected-page'"
+                           th:each="number:${pageNumberList}"
+                           th:text="${number}">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="order-status-dropdown" class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            選擇狀態
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
+            <li class="order-status-dropdown-row" th:each="orderStatus:${orderStatusList}" th:object="${orderStatus}">
+                <input type="hidden" class="order-status-id" th:value="*{id}">
+                <a href="#" class="order-status-option order-status-name" th:text="*{name}"></a>
+            </li>
+        </ul>
+    </div>
+</div>

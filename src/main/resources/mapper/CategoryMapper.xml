@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.littlejenny.bakery.generator.mapper.CategoryMapper">
+
+    <resultMap id="BaseResultMap" type="com.littlejenny.bakery.generator.dto.Category">
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="parentId" column="parent_id" jdbcType="INTEGER"/>
+        <result property="sortOrder" column="sort_order" jdbcType="TINYINT"/>
+        <result property="parentName" column="parent_name" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id
+        ,name,parent_id,
+        sort_order,parent_name
+    </sql>
+    <insert id="insertWithLargestOrder" useGeneratedKeys="true" keyProperty="id"  keyColumn="id">
+        INSERT INTO `bakery`.`category` (`name`, `sort_order`)
+        VALUES (#{category.name},
+                (SELECT (MAX(c.sort_order) + 1)
+                 FROM `bakery`.`category` as c));
+    </insert>
+    <update id="updateBatchSortOrder">
+
+    </update>
+    <select id="listOrderBySortOrderAscWithPage" resultType="com.littlejenny.bakery.generator.dto.Category">
+        SELECT
+        <include refid="Base_Column_List"></include>
+        FROM `bakery`.`category`
+        ORDER BY sort_order
+        ASC
+    </select>
+    <select id="listByDateAndSortOrderAsc" resultType="com.littlejenny.bakery.generator.dto.Category">
+        SELECT c.*
+        FROM bakery.product_on_sale as pos
+                 LEFT JOIN bakery.product as p
+                           ON p.id = pos.product_id
+                 LEFT JOIN bakery.category as c
+                           ON p.category_id = c.id
+        where pos.selled_date = #{date}
+        GROUP BY c.name, c.id
+        ORDER BY c.sort_order
+                ASC
+    </select>
+</mapper>

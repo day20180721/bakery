@@ -1,0 +1,36 @@
+<div th:fragment="content(pageName)">
+    <div class="container-fluid ">
+        <div class="row">
+            <div class="col-md-3 ">
+                <th:block th:include="fragments/content/dashboard:: business"></th:block>
+            </div>
+            <div class="col-md-9">
+                <div class="row">
+                    <form>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="reservation-dead-line" class="control-label">預購時限:</label>
+                                <input type="number" class="form-control" id="reservation-dead-line" th:value="${reservationDateLine}" min="0">
+                                <span class="help-block">如果設置為 5，則在 5 號販賣的商品，必須在 1 號前訂購</span>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="open-time" class="control-label">開店時間:</label>
+                                <input type="number" class="form-control" id="open-time" th:value="${openTime}" max="23">
+                                <span class="help-block"> 24 點請設置為 0 </span>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="close-time" class="control-label">閉店時間:</label>
+                                <input type="number" class="form-control" id="close-time" th:value="${closeTime}" max="23">
+                                <span class="help-block"> 24 點請設置為 0 </span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

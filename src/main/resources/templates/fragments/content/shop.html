@@ -1,0 +1,51 @@
+<th:block th:fragment="content(pageName)">
+    <div class="container-fluid ">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="category-dashboard">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li role="presentation" class="category-link" th:each="category:${categoryList}"
+                            th:object="${category}"
+                        ><a th:href="|/shop/*{id}/1?selectedDate=${selectedDate}|" th:text="*{name}"></a></li>
+                        <div class="calendar" th:data-request-highlight-url="|/shop/highLight|"
+                             th:data-highlight="${highlightDates}"
+                             th:data-request-date-url="'/'+${pageName}" th:data-selected-date="${selectedDate}"></div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="row">
+                    <div class="col-md-4 product-row" th:if="${productVO.remaining} &gt; 0"
+                         th:each="productVO:${productVOs}" th:object="${productVO}"
+                    >
+                        <input type="hidden" class="product-product-id" th:value="*{productId}">
+                        <div class="thumbnail my-thumbnail">
+                            <img class="product-image-url" th:src="*{imageUrl}"
+                                 alt="美麗的圖片">
+                        </div>
+                        <div class="caption my-caption">
+                            <h3 class="product-name" th:text="*{name}">大蒜麵包</h3>
+                            $<span class="product-price" th:text="*{#numbers.formatDecimal(price,0,0)}"></span>
+                            <span>剩餘</span>
+                            <span class="product-remaining" th:text="*{remaining}">5</span>
+                            </br>
+                            <input type="number" class="product-count" min="1" th:max="*{remaining}" value="1">
+                            <button type="button" class="btn btn-primary add-product-to-cart-btn">加入購物車
+                            </button>
+                            <input type="hidden" class="product-description" th:value="*{description}">
+                        </div>
+                    </div>
+                    <div id="page-number-list" class="col-md-12">
+                        <a th:href="|/shop/${selectedCategoryId}/${number}?selectedDate=${selectedDate}|"
+                           class="category-page-number-row"
+                           th:classappend="${selectedPage} == ${number} ? 'selected-page'"
+                           th:each="number:${pageNumberList}"
+                           th:text="${number}">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>

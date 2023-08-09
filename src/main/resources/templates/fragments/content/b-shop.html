@@ -1,0 +1,126 @@
+<div th:fragment="content(pageName)">
+    <div class="container-fluid ">
+        <div class="row">
+            <div class="col-md-3">
+                <th:block th:include="fragments/content/dashboard:: business"></th:block>
+                <div class="calendar" th:data-request-highlight-url="|${businessPrefix}/b-shop/highLight|"
+                     th:data-highlight="${highlightDates}" th:data-request-date-url="${businessPrefix}+'/'+${pageName}"
+                     th:data-selected-date="${selectedDate}"></div>
+            </div>
+            <div class="col-md-5">
+                <div class="row">
+                    <button class="btn btn-default" role="button" id="submit-btn">確認</button>
+                    <div style="text-align: center;background-color: #04AA6D">已選區</div>
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th colspan="1">名稱</th>
+                            <th colspan="1">原價</th>
+                            <th colspan="1">新價錢</th>
+                            <th colspan="1">剩餘數量</th>
+                            <th colspan="1">預約數量</th>
+                            <th colspan="1">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody id="on-sale-product-list">
+                        <tr class="on-sale-product-row" th:each="onSale,iterStat:${onsales}"
+                            th:object="${onSale}">
+                            <input type="hidden" class="on-sale-product-id" th:value="*{id}">
+                            <input type="hidden" class="on-sale-product-product-id" th:value="*{productId}">
+                            <td class="on-sale-product-name" th:text="*{name}"></td>
+                            <td class="on-sale-product-price sell-property" th:text="*{#numbers.formatDecimal(price,0,0)}"></td>
+                            <td class="on-sale-product-new-price sell-property" th:text="*{#numbers.formatDecimal(newPrice,0,0)}"></td>
+                            <td class="on-sale-product-stock sell-property" th:text="*{stock}"></td>
+                            <td class="on-sale-product-reservation sell-property" th:text="*{reservation}"></td>
+                            <td>
+                                <button type="button"
+                                        class="btn btn-success edit-on-sale-product-btn sell-property"
+                                        data-toggle="modal"
+                                        data-target="#on-sale-product-modal">編輯
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="row">
+                    <button class="btn btn-default" role="button" style="visibility: hidden">確認</button>
+                    <div style="text-align: center;background-color: #9d9d9d">尚未選擇區</div>
+                    <div class="col-md-12">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th colspan="1">名稱</th>
+                            </tr>
+                            </thead>
+                            <tbody id="not-on-sale-product-list">
+                            <tr th:each="notOnSale,iterStat:${notOnSales}" th:object="${notOnSale}"
+                                class="not-on-sale-product-row">
+                                <input type="hidden" class="not-on-sale-product-product-id" th:value="*{id}">
+
+                                <td class="not-on-sale-product-name" th:text="*{name}"></td>
+                                <td class="not-on-sale-product-price sell-property" th:text="*{#numbers.formatDecimal(price,0,0)}"></td>
+                                <td class="not-on-sale-product-new-price sell-property"></td>
+                                <td class="not-on-sale-product-stock sell-property">1</td>
+                                <td class="not-on-sale-product-reservation sell-property">0</td>
+                                <td>
+                                    <button type="button"
+                                            class="btn btn-success edit-not-on-sale-product-btn sell-property"
+                                            data-toggle="modal" data-target="#on-sale-product-modal">編輯
+                                    </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="on-sale-product-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="modal-title">編輯</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="on-sale-product-price">原價</label>
+                            <input type="number" class="form-control" id="on-sale-product-price"
+                                   placeholder="原價" readonly
+                            >
+                        </div>
+                        <div class="form-group">
+                            <label for="on-sale-product-new-price">新價格</label>
+                            <input type="number" class="form-control" id="on-sale-product-new-price"
+                                   placeholder="新價格"
+                                   value="0">
+                        </div>
+                        <div class="form-group">
+                            <label for="on-sale-product-stock">數量</label>
+                            <input type="number" class="form-control" id="on-sale-product-stock" placeholder="數量"
+                                   value="1">
+                        </div>
+                        <div class="form-group">
+                            <label for="on-sale-product-reservation">預購</label>
+                            <input type="number" class="form-control" id="on-sale-product-reservation"
+                                   placeholder="預購" value="0">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="modal-cancel" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" id="modal-submit" class="btn btn-primary">確認</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,71 @@
+<div th:fragment="content(pageName)">
+    <div class="container-fluid ">
+        <div class="row">
+            <div class="col-md-3">
+                <th:block th:include="fragments/content/dashboard:: business"></th:block>
+            </div>
+            <div class="col-md-9">
+                <div class="row">
+                    <button type="button" class="btn btn-default" data-toggle="modal" id="add-category-btn"
+                            data-target="#category-modal" data-whatever="@mdo">新增
+                    </button>
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th colspan="1">類別名稱</th>
+                            <th colspan="3">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody id="category-list">
+                        <tr class="category-row" th:each="category,iterStat:${categorys}" th:object="${category}">
+                            <input type="hidden" class="category-id" th:value="*{id}">
+                            <td class="col-md-2 category-name" th:text="*{name}"></td>
+                            <td class="col-md-2">
+                                <button type="button" class="btn btn-success edit-category-btn" data-toggle="modal"
+                                        data-target="#category-modal">編輯
+                                </button>
+                                <button type="button" class="btn btn-danger remove-category-btn">刪除</button>
+                            </td>
+                            <td class="col-md-offset-8"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div id="page-number-list" class="col-md-12">
+                        <a th:href="|/buisness/b-category/${number}|"
+                           class="category-page-number-row"
+                           th:classappend="${selectedPage} == ${number} ? 'selected-page'"
+                           th:each="number:${pageNumberList}"
+                           th:text="${number}">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="category-modal" tabindex="-1" role="dialog">
+        <input type="hidden" id="category-id">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 id="modal-title">新增</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="category-name" class="control-label">類別名:</label>
+                            <input type="text" class="form-control" id="category-name"></input>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="category-submit-btn">確認</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

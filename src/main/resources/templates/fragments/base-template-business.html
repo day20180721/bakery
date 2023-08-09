@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html th:fragment="template(title,pageName,lang)" th:lang="${lang}" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title th:text="${title}">Title</title>
+    <th:block th:remove="tag" th:include="fragments/base-metas::metas"></th:block>
+    <th:block th:remove="tag" th:include="fragments/base-links::links(${pageName})"></th:block>
+    <th:block th:remove="tag" th:include="fragments/base-scripts::scripts(${pageName})"></th:block>
+</head>
+
+<body>
+    <!-- 
+        xs      手機
+        sm >768 平板
+        md >992 桌面
+        lg >1200 
+    -->
+    <th:block th:include="'fragments/content/' + ${pageName} :: content(${pageName})"></th:block>
+    <th:block th:include="fragments/content/footer :: copy"></th:block>
+</body>
+</html>

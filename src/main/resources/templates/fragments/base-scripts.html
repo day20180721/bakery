@@ -1,0 +1,8 @@
+<div th:fragment="scripts(name)">
+    <script src="/js/jquery-3.6.4.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script type="module" th:src="'/js/' + ${name} +'.js'"></script>
+    <script src="/js/ajaxResultHandle.js"></script>
+    <script src="/js/stringUtil.js"></script>
+    <script src="/js/auth.js"></script>
+</div>

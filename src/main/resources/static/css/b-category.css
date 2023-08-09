@@ -1,0 +1,5 @@
+@import '/css/element/dropdownFilter.css';
+@import '/css/element/page-number.css';
+.category-row .btn  {
+    padding: 0;
+}

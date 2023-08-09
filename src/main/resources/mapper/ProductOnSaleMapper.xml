@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.littlejenny.bakery.generator.mapper.ProductOnSaleMapper">
+
+    <resultMap id="BaseResultMap" type="com.littlejenny.bakery.generator.dto.ProductOnSale">
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <result property="productId" column="product_id" jdbcType="INTEGER"/>
+        <result property="stock" column="stock" jdbcType="INTEGER"/>
+        <result property="reservation" column="reservation" jdbcType="INTEGER"/>
+        <result property="newPrice" column="new_price" jdbcType="DECIMAL"/>
+        <result property="selledDate" column="selled_date" jdbcType="DATE"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id
+        ,product_id,stock,
+        reservation,new_price,selled_date
+    </sql>
+    <select id="selectListOnSaleDayInSpecifiedYearAndMonth" resultType="java.lang.String">
+        SELECT selled_date
+        FROM bakery.product_on_sale
+        WHERE (selled_date BETWEEN DATE (#{begin})
+          AND DATE (#{end}))
+        GROUP BY selled_date;
+    </select>
+    <select id="getByProductIdAndSelledDate" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from product_on_sale
+        where
+        product_id = #{productId,jdbcType=NUMERIC}
+        AND selled_date = #{selledDate,jdbcType=TIMESTAMP}
+    </select>
+    <update id="addOnSaleProductReservation">
+        UPDATE `bakery`.`product_on_sale`
+        set reservation = reservation + #{item.count}
+        where product_id = #{item.productId}
+          AND selled_date = #{selledDate}
+          AND stock >= reservation + #{item.count};
+    </update>
+    <select id="selectListIdBySelledDate" resultType="java.lang.Integer">
+        select product_id
+        from product_on_sale
+        where selled_date = #{selledDate,jdbcType=TIMESTAMP}
+    </select>
+    <select id="selectListBySelledDate" resultType="com.littlejenny.bakery.generator.dto.ProductOnSale">
+        select
+        <include refid="Base_Column_List"/>
+        from product_on_sale
+        where selled_date = #{selledDate,jdbcType=TIMESTAMP}
+    </select>
+</mapper>

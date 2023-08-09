@@ -1,0 +1,27 @@
+<div th:fragment="content(pageName)">
+    <div class="container-fluid ">
+        <div class="row">
+            <div class="col-md-3">
+
+            </div>
+            <div class="col-md-9">
+                <div class="row">
+                    <div id="col-md-12 root-user-row">
+                        <form action="/oauth/root/" method="post" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label for="root-user-account" class="control-label">帳號</label>
+                                <input type="text" id="root-user-account" name="account">
+                            </div>
+                            <div class="form-group">
+                                <label for="root-user-password" class="control-label">密碼</label>
+                                <input type="password" id="root-user-password" name="password">
+                            </div>
+                            <input type="submit" class="btn btn-default" id="root-user-submit-btn">
+                            </input>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

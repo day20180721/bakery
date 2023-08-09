@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.littlejenny.bakery.generator.mapper.ProductMapper">
+
+    <resultMap id="BaseResultMap" type="com.littlejenny.bakery.generator.dto.Product">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="name" column="name" jdbcType="VARCHAR"/>
+            <result property="price" column="price" jdbcType="DECIMAL"/>
+            <result property="description" column="description" jdbcType="VARCHAR"/>
+            <result property="createdTime" column="created_time" jdbcType="TIMESTAMP"/>
+            <result property="lastUpdatedTime" column="last_updated_time" jdbcType="TIMESTAMP"/>
+            <result property="categoryId" column="category_id" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,name,price,
+        description,created_time,last_updated_time,
+        category_id
+    </sql>
+    <select id="listAndExcludeById" resultType="com.littlejenny.bakery.generator.dto.Product">
+        SELECT * FROM bakery.product
+        <if test="idList.size() > 0">
+            WHERE id NOT IN
+            <foreach collection="idList" item="id" index="index" open="(" close=")" separator=",">
+                #{id}
+            </foreach>
+        </if>
+    </select>
+</mapper>

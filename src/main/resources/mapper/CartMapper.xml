@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.littlejenny.bakery.generator.mapper.CartMapper">
+
+    <resultMap id="BaseResultMap" type="com.littlejenny.bakery.generator.dto.Cart">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="reservationDate" column="reservation_date" jdbcType="DATE"/>
+            <result property="customerId" column="customer_id" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,reservation_date,customer_id
+    </sql>
+    <select id="selectListReservationDayInSpecifiedYearAndMonthAndUserId" resultType="java.lang.String">
+        SELECT reservation_date
+        FROM bakery.cart
+        WHERE (reservation_date BETWEEN DATE (#{begin})
+          AND DATE (#{end}))
+          AND customer_id = #{userId}
+        GROUP BY reservation_date;
+    </select>
+    <select id="getOrNullByUserIdAndReservationDate" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from cart
+        where
+        reservation_date = #{reservationDate,jdbcType=TIMESTAMP}
+        AND customer_id = #{userId,jdbcType=NUMERIC}
+    </select>
+</mapper>

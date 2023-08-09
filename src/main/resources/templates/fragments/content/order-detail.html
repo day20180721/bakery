@@ -1,0 +1,69 @@
+<div th:fragment="content(pageName)">
+    <div class="container-fluid ">
+        <div class="row">
+            <div class="col-md-3">
+            </div>
+            <div class="col-md-9" th:object="${orderDetailVO}">
+                <input type="hidden" id="order-id" th:value="*{id}">
+                <input type="hidden" id="customer-id" th:valuue="*{customerId}">
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th colspan="1">編號</th>
+                                <th colspan="1">品名</th>
+                                <th colspan="1">單價</th>
+                                <th colspan="1">個數</th>
+                                <th colspan="1">總價</th>
+                                <th colspan="1">備註</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr class="order-item-row" th:each="orderItem,iterStat:${orderDetailVO.orderDetailItemVOList}" th:object="${orderItem}">
+                                <Input type="hidden" class="order-item-id" th:value="*{id}">
+                                <td th:text="${iterStat.index}">編號</td>
+                                <td class="order-item-name" th:text="*{name}">NAME</td>
+                                <td class="order-item-price" th:text="*{price}">PRICE</td>
+                                <td class="order-item-count" th:text="*{count}"></td>
+                                <td class="order-item-total-price" th:text="*{#numbers.formatDecimal(totalPrice,0,0)}">SUM</td>
+                                <td class="order-item-description" th:text="*{description}">DESCRIPTION</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-2">總金額</div>
+                            <div class="col-md-10" th:text="*{#numbers.formatDecimal(totalPrice,0,0)}"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-2">下單時間</div>
+                            <div class="col-md-10" th:text="*{createdDatetime}"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-2">訂單狀態</div>
+                            <div class="col-md-10" th:text="*{orderStatusName}"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-2">備註</div>
+                            <div class="col-md-10" th:text="*{note}"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-2">運送時間</div>
+                            <div class="col-md-10" th:text="*{shippingTime}"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

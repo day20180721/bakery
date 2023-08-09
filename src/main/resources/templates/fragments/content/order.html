@@ -1,0 +1,37 @@
+<div th:fragment="content(pageName)">
+    <div class="container-fluid ">
+        <div class="row">
+            <div class="col-md-3">
+
+            </div>
+            <div class="col-md-9">
+                <div class="row">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th colspan="1">編號</th>
+                            <th colspan="1">取貨時間</th>
+                            <th colspan="1">總價</th>
+                            <th colspan="1">狀態</th>
+                            <th colspan="1">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="order-row" th:each="order,iterStat:${orders}" th:object="${order}">
+                            <Input type="hidden" class="order-item-id" th:value="*{id}">
+                            <td th:text="${iterStat.index}"></td>
+                            <td class="order-shipping-time" th:text="*{shippingTime}"></td>
+                            <td class="order-total-price" th:text="*{#numbers.formatDecimal(totalPrice,0,0)}"></td>
+                            <td class="order-order-status" th:text="*{orderStatusName}"></td>
+                            <td>
+                                <a th:href="${customerPrefix} +'/orderDetail'+'/' + *{id}" type="button" class="btn btn-primary order-select-btn">查看
+                                </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+/* 排版 margin padding border position width height */
+
+.my-mobile-navbar-header {
+    /*為了使toggle貼齊最右邊而設置  */
+    position: relative;
+}
+/* 原本的toggle有設定margin等訊息，注意 */
+.my-mobile-navbar-toggle {
+    /* 如果不設定，則會被選項蓋過*/
+    z-index: 1;
+    /* 原本為right */
+    float: none;
+    /*為了使toggle貼齊最右邊而設置  */
+    position: absolute;
+    right: 0;
+    /* top 與 bottom 為 0 = 垂直居中 */
+    top: 0;
+    bottom: 0;
+    /* 原本為 1 */
+    border: 0px solid transparent;
+}
+
+/* 文字樣式 */
+/* 非文字樣式 */
+/*  */

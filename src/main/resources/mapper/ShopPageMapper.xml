@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.littlejenny.bakery.generator.mapper.ShopPageMapper">
+    <select id="selectPageShopProductVOByDateAndCategoryId"
+            resultType="com.littlejenny.bakery.vo.ShopProductVO">
+        SELECT p.name,
+               p.description,
+               p.price,
+               pos.product_id,
+               pos.stock,
+               pos.reservation,
+               pos.new_price,
+               pg.url as image_url
+        FROM bakery.product_on_sale as pos
+                 LEFT JOIN bakery.product as p
+                           ON p.id = pos.product_id
+                 LEFT JOIN bakery.product_gallery as pg
+                           ON pg.product_id = pos.product_id
+        WHERE pos.selled_date = DATE (#{date})
+          AND p.category_id = #{categoryId}
+          AND (pos.stock - pos.reservation)> 0
+    </select>
+    <select id="selectPageShopProductVOByDate" resultType="com.littlejenny.bakery.vo.ShopProductVO">
+        SELECT p.name,
+               p.description,
+               p.price,
+               pos.product_id,
+               pos.stock,
+               pos.reservation,
+               pos.new_price,
+               pg.url as image_url
+        FROM bakery.product_on_sale as pos
+                 LEFT JOIN bakery.product as p
+                           ON p.id = pos.product_id
+                 LEFT JOIN bakery.product_gallery as pg
+                           ON pg.product_id = pos.product_id
+        WHERE pos.selled_date = DATE (#{date})
+          AND (pos.stock - pos.reservation)
+            > 0
+    </select>
+</mapper>

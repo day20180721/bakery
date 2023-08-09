@@ -1,0 +1,19 @@
+# mysql
+docker volume create mysql-data
+docker volume create mysql-conf
+docker run --name mysql -e MYSQL_ROOT_PASSWORD=mQDkC5MEcGf8 -p 3306:3306 -v mysql-data:/var/lib/mysql -v mysql-conf:/etc/mysql -d mysql:8.0.32
+docker cp ./my.cnf mysql:/etc/mysql/conf.d
+docker update --restart unless-stopped mysql
+# redis
+docker volume create redis-data
+docker volume create redis-conf
+docker run --name redis -p 6379:6379 -v redis-conf:/usr/local/etc/redis -v redis-data:/data -d redis:7.0 redis-server /usr/local/etc/redis/redis.conf --save 60 1 --loglevel warning
+docker cp ./redis.conf redis:/usr/local/etc/redis/redis.conf
+docker update --restart unless-stopped redis
+# nginx
+docker volume create nginx-conf
+docker volume create nginx-content
+docker volume create nginx-ssl
+sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/nginx.key -out /etc/nginx/ssl/nginx.crt
+docker run --name nginx -v nginx-ssl:/etc/nginx/ssl -v nginx-conf:/etc/nginx -v nginx-content:/usr/share/nginx/html -d -p 80:80 -p 443:443 nginx
+docker update --restart unless-stopped nginx

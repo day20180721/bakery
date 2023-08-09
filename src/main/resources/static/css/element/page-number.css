@@ -1,0 +1,6 @@
+#page-number-list {
+    text-align: center;
+}
+#page-number-list .selected-page {
+    color: red;
+}

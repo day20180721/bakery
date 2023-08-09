@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.littlejenny.bakery.generator.mapper.BShopPageMapper">
+
+    <select id="selectListBShopProductVOByselledDate" resultType="com.littlejenny.bakery.vo.BShopProductVO">
+        SELECT pos.id,
+               pos.product_id,
+               pos.stock,
+               pos.reservation,
+               pos.new_price,
+               p.price,
+               p.name,
+               p.description
+        FROM bakery.product_on_sale as pos
+                 LEFT JOIN bakery.product as p
+                           ON pos.product_id = p.id
+        where selled_date = #{date}
+    </select>
+</mapper>

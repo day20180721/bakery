@@ -1,0 +1,12 @@
+/* 排版 margin padding border position */
+/* 避免與navbar重疊 */
+@media only screen and (min-width: 992px) {
+    body {
+        padding-top: 70px;
+    }
+}
+/* 文字樣式 */
+/* 非文字樣式 */
+body {
+    background-color: rgb(250, 250, 250);
+}

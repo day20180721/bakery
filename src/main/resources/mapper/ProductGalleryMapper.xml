@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.littlejenny.bakery.generator.mapper.ProductGalleryMapper">
+
+    <resultMap id="BaseResultMap" type="com.littlejenny.bakery.generator.dto.ProductGallery">
+            <id property="productId" column="product_id" jdbcType="INTEGER"/>
+            <result property="name" column="name" jdbcType="VARCHAR"/>
+            <result property="url" column="url" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        product_id,name,url
+    </sql>
+    <select id="getByProductId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from product_gallery
+        where
+        product_id = #{productId,jdbcType=NUMERIC}
+    </select>
+</mapper>

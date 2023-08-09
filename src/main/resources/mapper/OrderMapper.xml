@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.littlejenny.bakery.generator.mapper.OrderMapper">
+
+    <resultMap id="BaseResultMap" type="com.littlejenny.bakery.generator.dto.Order">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="customerId" column="customer_id" jdbcType="INTEGER"/>
+            <result property="note" column="note" jdbcType="VARCHAR"/>
+            <result property="totalPrice" column="total_price" jdbcType="DECIMAL"/>
+            <result property="createdDatetime" column="created_datetime" jdbcType="TIMESTAMP"/>
+            <result property="lastUpdatedDatetime" column="last_updated_datetime" jdbcType="TIMESTAMP"/>
+            <result property="orderStatus" column="order_status" jdbcType="TINYINT"/>
+            <result property="shippingTime" column="shipping_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,customer_id,note,
+        total_price,created_datetime,last_updated_datetime,
+        order_status,shipping_time
+    </sql>
+    <select id="selectListByCustomerId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from bakery.order
+        where
+        customer_id = #{customerId,jdbcType=NUMERIC}
+    </select>
+    <select id="selectListByCustomerIdAndPage" resultType="com.littlejenny.bakery.generator.dto.Order">
+        select
+        <include refid="Base_Column_List"/>
+        from bakery.order
+        where
+        customer_id = #{customerId,jdbcType=NUMERIC}
+    </select>
+</mapper>

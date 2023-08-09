@@ -1,0 +1,21 @@
+@import '/css/element/calendar.css';
+/* 排版 margin padding border position */
+
+
+#not-on-sale-product-list .sell-property {
+    display: none;
+}
+
+#on-sale-product-list .sell-property {
+
+}
+
+.on-sale-product-row .btn {
+    padding: 0;
+}
+.not-on-sale-product-row .btn {
+    padding: 0;
+}
+/* 文字樣式 */
+
+/* 非文字樣式 */
