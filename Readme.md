@@ -14,11 +14,16 @@
 * Google 社交登錄  
   `實踐之模塊 https://www.justauth.cn/guide/oauth/google/#_3-%E6%8E%A8%E8%8D%90`
 
+## 運行前請注意
+請將 Application.properties 中的 spring.sql.init.mode=always 打開，以便自動創建所有Mysql表，但是在下次重啟前必須關閉，否則會有刪除已創建之表的風險
+
 ## 運行方式
 
 1. 下載
 2. 替換配置文件中各服務的帳號、密碼等私密訊息
 3. 運行
+
+
 
 ## 使用影片
 
