@@ -5,7 +5,7 @@
 
 ## 使用工具
 
-* 編輯 - Idea IntelliJ
+* IDE - Idea IntelliJ
 * 前端 - BootStrap 3
 * 前端模板 - Thymeleaf
 * 後端 - Spring Boot 3
