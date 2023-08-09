@@ -21,28 +21,28 @@
 3. 運行
 
 ## 使用影片
-https://github.com/day20180721/bakery/assets/44454920/83894861-5b1a-4274-a22a-825070a0c339
+https://github.com/day20180721/bakery-dev/assets/44454920/83894861-5b1a-4274-a22a-825070a0c339
 
 
 ## 如何新建一個新頁面 ?
 
 我定義了兩種BaseTemplate，分別是customer與business，可依照該頁面的功能從兩者中選一，Basetemplate裡面會導入一些基礎的 js、css、head-meta ，只要使用 Thymeleaf 引入模板即可快速建立頁面
 
-https://github.com/day20180721/bakery/assets/44454920/c7aca4d4-374b-4283-a69f-8ed1a75ab0ed
+https://github.com/day20180721/bakery-dev/assets/44454920/c7aca4d4-374b-4283-a69f-8ed1a75ab0ed
 
 
 ## 新建一張表後如何速成 Service 中的 CRUD ?
 1. ##### 創建對應之DTO
  
 
-https://github.com/day20180721/bakery/assets/44454920/0ba1e22b-a90c-4186-90b1-426c58b7ca10
+https://github.com/day20180721/bakery-dev/assets/44454920/0ba1e22b-a90c-4186-90b1-426c58b7ca10
 
 
 2. ##### 創建Service、Mapper、MapperXml
 
 
 
-https://github.com/day20180721/bakery/assets/44454920/2f9b19c0-c197-4cb0-b6dd-b231b63d90a2
+https://github.com/day20180721/bakery-dev/assets/44454920/2f9b19c0-c197-4cb0-b6dd-b231b63d90a2
 
 
 ## 重要檔案說明
