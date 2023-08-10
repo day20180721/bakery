@@ -32,7 +32,11 @@ https://github.com/day20180721/bakery/assets/44454920/ef7260f4-de98-416b-b78e-c6
 
 我定義了兩種BaseTemplate，分別是customer與business，可依照該頁面的功能從兩者中選一，Basetemplate裡面會導入一些基礎的 js、css、head-meta ，只要使用 Thymeleaf 引入模板即可快速建立頁面
 
-https://github.com/day20180721/bakery/assets/44454920/75d44d06-b64d-4844-b59b-d006d8abf913
+
+
+https://github.com/day20180721/bakery/assets/44454920/70c75d8f-c60c-4d41-a818-2beb0f391272
+
+
 
 ## 新建一張表後如何速成 Service 中的 CRUD ?
 1. ##### 創建對應之DTO
